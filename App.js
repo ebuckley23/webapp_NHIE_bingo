@@ -1,18 +1,25 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider as PaperProvider, Portal } from 'react-native-paper';
 import { NavigationContainer, useLinking } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthScreen from './src/screens/Auth';
 import environment from './src/config/environment';
+import authentication from './src/config/authentication';
+import UserProvider from './src/utils/context/providers/userContext';
+import useUserContext from './src/utils/hooks/useUserContext';
+import StartScreen from './src/screens/Start';
+
 environment();
+authentication();
 
 const RootStack = createStackNavigator();
 
 // Enable Web: https://github.com/react-navigation/react-navigation/issues/6780
-export default function App() {
+function App() {
   const navigationRef = useRef();
   const [isReady, setIsReady] = useState(false);
   const [initialState, setInitialState] = useState();
+  const { refreshUserContext, isAuthenticated } = useUserContext();
 
   const { getInitialState } = useLinking(navigationRef, {
     prefixes: [],
@@ -23,6 +30,7 @@ export default function App() {
     getInitialState().then((state) => {
       if (state) setInitialState(state);
       setIsReady(true);
+      refreshUserContext();
     })
   }, [getInitialState]);
 
@@ -30,17 +38,26 @@ export default function App() {
   return (
     <NavigationContainer initialState={initialState} ref={navigationRef}>
       <RootStack.Navigator>
-        <RootStack.Screen name='Auth' component={AuthScreen} />
+        {!isAuthenticated
+          ? (
+            <RootStack.Screen name='Auth' component={AuthScreen} />
+          )
+          : (
+            <RootStack.Screen name='Start' component={StartScreen} />
+          )}
       </RootStack.Navigator>
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default (props) => {
+  return (
+    <UserProvider>
+      <PaperProvider>
+        <Portal>
+          <App {...props} />
+        </Portal>
+      </PaperProvider>
+    </UserProvider>
+  )
+}

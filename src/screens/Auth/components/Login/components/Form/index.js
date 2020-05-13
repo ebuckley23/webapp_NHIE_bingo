@@ -25,8 +25,9 @@ export default ({values, touched, errors, handleChange, handleBlur, handleSubmit
         onChangeText={handleChange('password')}
         onBlur={handleBlur('password')}
         errorMsg={errors.password}
+        secureTextEntry={true}
       />
-      <Button onPress={handleSubmit}>Login</Button>
+      <Button icon='login-variant' onPress={handleSubmit}>Login</Button>
     </KeyboardAvoidingView>
   )
 }
