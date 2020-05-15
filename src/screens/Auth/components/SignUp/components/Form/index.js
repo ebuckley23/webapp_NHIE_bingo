@@ -47,6 +47,7 @@ export default ({values, touched, errors, handleChange, handleBlur, handleSubmit
         onChangeText={handleChange('password')}
         onBlur={handleBlur('password')}
         errorMsg={errors.password}
+        secureTextEntry={true}
       />
       <FormField
         testId='signup_confirmPassword'
@@ -56,6 +57,7 @@ export default ({values, touched, errors, handleChange, handleBlur, handleSubmit
         onChangeText={handleChange('confirm_password')}
         onBlur={handleBlur('confirm_password')}
         errorMsg={errors.confirm_password}
+        secureTextEntry={true}
       />
       <Button onPress={handleSubmit}>Sign Up</Button>
     </KeyboardAvoidingView>

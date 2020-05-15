@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { TextInput, HelperText } from 'react-native-paper';
 
-export default ({testId, label, isError, value, onChangeText, onBlur, errorMsg}) => {
+export default ({testId, label, isError, value, onChangeText, onBlur, errorMsg, ...rest}) => {
   return (
     <View>
       <TextInput
@@ -14,6 +14,7 @@ export default ({testId, label, isError, value, onChangeText, onBlur, errorMsg})
         onBlur={onBlur}
         dense
         mode='outlined'
+        {...rest}
       />
       <HelperText type='error' visible={isError}>
         {errorMsg}
