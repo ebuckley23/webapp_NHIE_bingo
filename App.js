@@ -8,6 +8,7 @@ import authentication from './src/config/authentication';
 import UserProvider from './src/utils/context/providers/userContext';
 import useUserContext from './src/utils/hooks/useUserContext';
 import StartScreen from './src/screens/Start';
+import GameScreen from './src/screens/Game';
 
 environment();
 authentication();
@@ -43,7 +44,10 @@ function App() {
             <RootStack.Screen name='Auth' component={AuthScreen} />
           )
           : (
+            <>
             <RootStack.Screen name='Start' component={StartScreen} />
+            <RootStack.Screen name='Game' component={GameScreen} />
+            </>
           )}
       </RootStack.Navigator>
     </NavigationContainer>
