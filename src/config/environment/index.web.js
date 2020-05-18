@@ -38,6 +38,6 @@ const getEnvVars = (env = '') => {
 };
 
 export default () => {
-  const result = getEnvVars(nhie.env);
+  const result = getEnvVars(nhie.env || process.env.REACT_APP_RELEASE_CHANNEL);
   setEnvironmentVars(result);
 };

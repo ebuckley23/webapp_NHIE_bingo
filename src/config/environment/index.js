@@ -2,7 +2,7 @@ import Constants from 'expo-constants';
 import setEnvironmentVars from './envars';
 
 const { manifest, sessionId } = Constants;
-const { nhie, version } = manifest;
+const { releaseChannel, nhie, version } = manifest;
 
 const envars = {
   APP_VERSION: version,
@@ -38,6 +38,6 @@ const getEnvVars = (env = '') => {
 };
 
 export default () => {
-  const result = getEnvVars(nhie.env);
+  const result = getEnvVars(nhie.env || releaseChannel);
   setEnvironmentVars(result);
 };
