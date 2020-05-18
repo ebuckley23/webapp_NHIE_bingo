@@ -2,12 +2,12 @@ import Constants from 'expo-constants';
 import setEnvironmentVars from './envars';
 
 const { manifest, sessionId } = Constants;
-const { version } = manifest;
+const { releaseChannel, nhie, version } = manifest;
 
 const envars = {
   APP_VERSION: version,
-  SESSION_ID: sessionId
-}
+  SESSION_ID: sessionId,
+};
 
 const ENV = {
   test: {
@@ -21,23 +21,23 @@ const ENV = {
       'email',
       'profile',
       'openid',
-      'aws.cognito.signin.user.admin'
+      'aws.cognito.signin.user.admin',
     ],
     OAUTH_REDIRECT_SIGN_IN: '',
-    OAUTH_REDIRECT_SIGN_OUT: ''
+    OAUTH_REDIRECT_SIGN_OUT: '',
   },
   prod: {
-    ...envars
-  }
-}
+    ...envars,
+  },
+};
 
 const getEnvVars = (env = '') => {
-  if (env === null || env === undefined || env === '') return ENV.test;
+  if (!env) return ENV.test;
   if (env.indexOf('test') !== -1) return ENV.test;
   if (env.indexOf('prod') !== -1) return ENV.prod;
-}
+};
 
 export default () => {
-  const result = getEnvVars(Constants.manifest.releaseChannel);
+  const result = getEnvVars(nhie.env || releaseChannel);
   setEnvironmentVars(result);
-}
+};

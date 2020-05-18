@@ -2,16 +2,16 @@ version: '3'
 services:
   #Nginx Service
   webserver:
-    image: nginx:alpine
+    build:
+      context: .
+      args:
+        env: prod
     container_name: webserver
     restart: unless-stopped
     tty: true
     ports:
       - '80:80'
       - '443:443'
-    volumes:
-      - ./web-build:/usr/share/nginx/html/
-      - ./nginx/:/etc/nginx/
     networks:
       - app-network
 
