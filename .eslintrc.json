@@ -1,0 +1,4 @@
+{
+  "extends": ["plugin:prettier/recommended", "plugin:react/recommended"],
+  "plugins": ["react"]
+}
