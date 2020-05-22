@@ -1,17 +1,17 @@
 version: '3'
 services:
   #Nginx Service
-  webserver:
-    build:
-      context: .
-      args:
-        env: prod
-    container_name: webserver
+  webapp:
+    container_name: webapp
     restart: unless-stopped
     tty: true
     ports:
       - '80:80'
       - '443:443'
+    build:
+      context: .
+      args:
+        env: test # will be prod once setup
     networks:
       - app-network
 
