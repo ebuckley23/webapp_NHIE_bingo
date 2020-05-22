@@ -1,0 +1,10 @@
+FROM nhie/build
+
+# Args
+ARG env
+
+# Default port exposure
+EXPOSE 8080
+
+# Run custom scripts
+RUN ./start.sh $env

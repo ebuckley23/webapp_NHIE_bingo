@@ -2,14 +2,24 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "start:docker": "docker-compose up",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "web:build": "rm -rf web-build && expo build:web",
+    "web:build:prod": "rm -rf web-build && expo build:web --config app.config.prod.js",
     "eject": "expo eject",
     "clean": "rm -rf node_modules && yarn",
-    "build:web": "rm -rf web-build && expo build:web --config app.config.prod.js",
-    "build:docker": "docker build ."
+    "docker:compose": "docker-compose up",
+    "docker:compose:prod": "docker-compose -f docker-compose.prod.yml up",
+    "docker:build": "docker build -t nhie/webapp --build-arg env=test .",
+    "docker:build:builder": "docker build -f Dockerfile.builder -t nhie/builder:latest .",
+    "docker:build:build": "docker build -f Dockerfile.build -t nhie/build:latest .",
+    "docker:build:webapp": "docker build -f Dockerfile.webapp -t nhie/webapp:latest .",
+    "docker:run": "docker run --name nhie -d -p 80:80 nhie/webapp",
+    "heroku:push": "heroku container:push web -a nhie-bingo  --arg env=test",
+    "heroku:release": "heroku container:release web -a nhie-bingo",
+    "heroku:open": "heroku open -a nhie-bingo",
+    "heroku:logs": "heroku logs -a nhie-bingo --tail"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.6",

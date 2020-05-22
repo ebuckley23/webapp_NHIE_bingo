@@ -1,9 +1,9 @@
 version: '3'
 services:
   #Nginx Service
-  webserver:
+  webapp:
     image: nginx:alpine
-    container_name: webserver
+    container_name: webapp
     restart: unless-stopped
     tty: true
     ports:
@@ -11,7 +11,7 @@ services:
       - '443:443'
     volumes:
       - ./web-build:/usr/share/nginx/html/
-      - ./nginx/:/etc/nginx/
+      - ./nginx/conf.d:/etc/nginx/conf.d
     networks:
       - app-network
 

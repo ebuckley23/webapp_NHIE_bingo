@@ -1,0 +1,6 @@
+# TODO: have not tested this. Deploying manually for now.
+build:
+  docker:
+    web: Dockerfile
+run:
+  web: bundle exec puma -C config/puma.rb

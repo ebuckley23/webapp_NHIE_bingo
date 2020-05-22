@@ -2,22 +2,31 @@
 
 ## to run in docker for dev
 
-- expo build:web
-- docker-compose up
+- yarn web:build
+- yarn docker:compose
 
 ## build docker image
 
-- docker build .
+- yarn docker:build
 
 ## run docker image
 
-- docker run --name nhie -d -p 80:80 <dockerImageId>
+- yarn docker:run
 
 ## deploy docker image
 
-- TODO
+- yarn heroku:push
+- yarn heroku:release
 
-## notes
+## open heroku web app
+
+- yarn heroku:open
+
+## heroku web app logs
+
+- yarn heroku:logs
+
+## notes - TODO: clean up
 
 - https://docs.docker.com/engine/reference/builder/
 - https://docs.docker.com/compose/compose-file/
