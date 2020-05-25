@@ -11,7 +11,7 @@ services:
     build:
       context: .
       args:
-        env: test # will be prod once setup
+        env: prod
     networks:
       - app-network
 

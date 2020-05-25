@@ -16,7 +16,7 @@
     "docker:build:build": "docker build -f Dockerfile.build -t nhie/build:latest .",
     "docker:build:webapp": "docker build -f Dockerfile.webapp -t nhie/webapp:latest .",
     "docker:run": "docker run --name nhie -d -p 80:80 nhie/webapp",
-    "heroku:push": "heroku container:push web -a nhie-bingo  --arg env=test",
+    "heroku:push": "heroku container:push web -a nhie-bingo  --arg env=prod",
     "heroku:release": "heroku container:release web -a nhie-bingo",
     "heroku:open": "heroku open -a nhie-bingo",
     "heroku:logs": "heroku logs -a nhie-bingo --tail"
